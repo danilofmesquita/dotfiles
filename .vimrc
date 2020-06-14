@@ -24,10 +24,12 @@ let g:SuperTabDefaultCompletionType="context"
 let g:dracula_colorterm = 0
 colorscheme dracula
 
-setlocal spell spelllang=en_us,pt_br
+"setlocal spell spelllang=en_us,pt_br
+set spelllang=en_us,pt_br
 set showcmd
+set mouse=a
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
-noremap <Right> <Nop>
+noremap <Right> <Nop>A

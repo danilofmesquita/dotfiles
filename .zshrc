@@ -69,7 +69,7 @@ ZSH_THEME="jreese"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf ufw docker archlinux mvn npm ng taskwarrior gpg-agent)
+plugins=(git fzf ufw docker archlinux mvn npm ng gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,4 +98,6 @@ export TERM='xterm-256color'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+export PATH="$HOME/.node_modules/bin:$PATH"
+export npm_config_prefix=~/.node_modules

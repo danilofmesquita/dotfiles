@@ -6,7 +6,7 @@
 # Controle de som: amixer (pacote alsa-utils)
 # PrintScreen: flameshot
 # Lançador de aplicativos: rofi com tema dracula
-# Notificações: dust
+# Notificações: dunst
 # Coposite Manager: picom
 # Lançador de aplicativos autostart: dex
 # Wallpaper: nitrogen
@@ -67,6 +67,7 @@ bindsym Mod1+F4 kill
 # Lançador de aplicativos
 bindsym $mod+d exec --no-startup-id "rofi -font 'monospace 11' -show drun -theme base16-dracula"
 bindsym $mod+Tab exec --no-startup-id "rofi -font 'monospace 11' -show window -theme base16-dracula"
+bindsym Mod1+Tab exec --no-startup-id "rofi -font 'monospace 11' -show window -theme base16-dracula"
 
 # Lançador de bloqueio de tela
 bindsym $mod+b exec i3lock -c 282a36
@@ -133,6 +134,11 @@ set $ws7 "7:chat"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+# Default Layouts 
+# workspace_layout tabbed
+for_window [workspace=$ws2] layout tabbed 
+for_window [workspace=$ws3] layout tabbed
+for_window [workspace=$ws6] layout tabbed
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -176,7 +182,7 @@ mode "resize" {
 # Pressing right will grow the window’s width.
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
-   bindsym j resize shrink width 10 px or 10 ppt
+      bindsym j resize shrink width 10 px or 10 ppt
       bindsym k resize grow height 10 px or 10 ppt
       bindsym l resize shrink height 10 px or 10 ppt
       bindsym ccedilla resize grow width 10 px or 10 ppt
@@ -192,14 +198,14 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-   position top
+      position top
       status_command i3blocks
       tray_padding 5
       tray_output primary
-      strip_workspace_numbers yes 
+#     strip_workspace_numbers yes 
 
       colors {
-         background #282A36
+            background #282A36
             statusline #F8F8F2
             separator  #44475A
 
@@ -212,8 +218,7 @@ bar {
 
 }
 
-#gaps inner 8
-#smart_gaps on
+gaps inner 6
 
 exec --no-startup-id dex -ae i3
 exec --no-startup-id setxkbmap br -model thinkpad
@@ -221,7 +226,7 @@ exec --no-startup-id dunst
 exec --no-startup-id picom
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift -l -15.77:-47.92
-exec_always --no-startup-id autotiling
+#exec_always --no-startup-id autotiling
 
 focus_follows_mouse no
 mouse_warping none
@@ -234,7 +239,8 @@ for_window [class="Nitrogen"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="Transmission-gtk"] floating enable
-for_window [class="Microsoft Teams - Preview"] floating enable
+#for_window [class="Microsoft Teams - Preview"] floating enable
+for_window [title="Notificação do Microsoft Teams"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
 for_window [class="Eom"] floating enable
@@ -242,6 +248,7 @@ for_window [window_role="About"] floating enable
 for_window [window_role="app"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Organizer"] floating enable
 
 for_window [class="Spotify"] move to workspace $ws5
 for_window [class="jetbrains-idea"] move to workspace $ws2
@@ -252,14 +259,14 @@ assign [class="Chromium"] $ws1
 assign [class="jetbrains-idea"] $ws2
 assign [class="Thunderbird"] $ws3
 assign [class="(?i)office.*"] $ws4
-assign [class="Atril"] $ws4
-assign [class="Joplin"] $ws4
+#assign [class="Atril"] $ws4
+#assign [class="Joplin"] $ws4
 assign [class="vlc"] $ws5
-assign [class="TelegramDesktop"] $ws7
-assign [class="Rambox"] $ws7
-assign [class="Slack"] $ws7
+#assign [class="TelegramDesktop"] $ws7
+#assign [class="Rambox"] $ws7
+#assign [class="Slack"] $ws7
 assign [class="Microsoft Teams - Preview"] $ws7
-assign [class="Virt-manager"] $ws6
+#assign [class="Virt-manager"] $ws6
 assign [class="VirtualBoxVM"] $ws6
 assign [class="VirtualBox Manager"] $ws6
 assign [class="VirtualBox Machine"] $ws6
