@@ -28,7 +28,7 @@
 set $mod Mod4
 
 # Utiliza a fonte mono default do sistema
-font pango:monospace 11
+font pango:monospace 12
 
 # Configura o daemon de lock
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 282a36 --nofork
@@ -61,8 +61,10 @@ floating_modifier $mod
 bindsym $mod+Return exec  --no-startup-id i3-sensible-terminal
 
 # Fechar Janelas
-bindsym $mod+Shift+q kill
-bindsym Mod1+F4 kill
+bindsym $mod+q	[con_id="__focused__" title="^(?!dropdown_).*$"] kill
+#bindsym $mod+Shift+q kill
+#bindsym Mod1+F4 kill
+bindsym --release $mod+button2 kill
 
 # Lançador de aplicativos
 bindsym $mod+d exec --no-startup-id "rofi -font 'monospace 11' -show drun -theme base16-dracula"
@@ -127,18 +129,14 @@ bindsym $mod+a focus parent
 set $ws1 "1:www"
 set $ws2 "2:code"
 set $ws3 "3:mail"
-set $ws4 "4:office"
-set $ws5 "5:media"
+set $ws4 "4:chat"
+set $ws5 "5:office"
 set $ws6 "6:virt"
-set $ws7 "7:chat"
+set $ws7 "7:media"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-# Default Layouts 
-# workspace_layout tabbed
-for_window [workspace=$ws2] layout tabbed 
-for_window [workspace=$ws3] layout tabbed
-for_window [workspace=$ws6] layout tabbed
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -200,7 +198,7 @@ bindsym $mod+r mode "resize"
 bar {
       position top
       status_command i3blocks
-      tray_padding 5
+      tray_padding 4
       tray_output primary
 #     strip_workspace_numbers yes 
 
@@ -226,13 +224,14 @@ exec --no-startup-id dunst
 exec --no-startup-id picom
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift -l -15.77:-47.92
-#exec_always --no-startup-id autotiling
+exec --no-startup-id setxkbmap br -model thinkpad
+exec_always --no-startup-id autotiling
 
 focus_follows_mouse no
 mouse_warping none
 
-for_window [class=".*"] border pixel 3
-for_window [class="Alacritty"] floating enable
+for_window [class=".*"] border pixel 2
+#for_window [class="Alacritty"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Nitrogen"] floating enable
@@ -250,7 +249,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Organizer"] floating enable
 
-for_window [class="Spotify"] move to workspace $ws5
+for_window [class="Spotify"] move to workspace $ws7
 for_window [class="jetbrains-idea"] move to workspace $ws2
 
 # Regras de organização
@@ -258,20 +257,18 @@ assign [class="firefox"] $ws1
 assign [class="Chromium"] $ws1
 assign [class="jetbrains-idea"] $ws2
 assign [class="Thunderbird"] $ws3
-assign [class="(?i)office.*"] $ws4
-#assign [class="Atril"] $ws4
-#assign [class="Joplin"] $ws4
-assign [class="vlc"] $ws5
-#assign [class="TelegramDesktop"] $ws7
-#assign [class="Rambox"] $ws7
-#assign [class="Slack"] $ws7
-assign [class="Microsoft Teams - Preview"] $ws7
-#assign [class="Virt-manager"] $ws6
+assign [class="(?i)office.*"] $ws5
+assign [class="vlc"] $ws7
+assign [class="Microsoft Teams - Preview"] $ws4
 assign [class="VirtualBoxVM"] $ws6
 assign [class="VirtualBox Manager"] $ws6
 assign [class="VirtualBox Machine"] $ws6
 workspace $ws1 output primary
 workspace $ws2 output primary
+
+for_window [workspace=$ws2 class="jetbrains-idea"] layout tabbed 
+for_window [workspace=$ws2 class="code-oss"] layout tabbed 
+for_window [workspace=$ws3 class="Thunderbird"] layout tabbed 
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -288,4 +285,18 @@ bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Prior workspace next_on_output
 bindsym $mod+Next workspace prev_on_output
 
-hide_edge_borders smart
+#hide_edge_borders smart
+
+# Windows Swallow
+exec_always --no-startup-id python3 $HOME/.config/i3/i3-swallow.py
+
+# Moushe Wheel
+# exec --no-startup-id imwheel -b 45
+
+# Quick Terminal
+exec --no-startup-id alacritty --title dropdown_terminal
+for_window [title="dropdown_terminal"] move scratchpad
+bindsym $mod+t [title="dropdown_terminal"] scratchpad show, resize set 900 580, move position center
+
+no_focus [title="Microsoft Teams Notification"]
+no_focus [title="Notificação do Microsoft Teams"]

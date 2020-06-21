@@ -8,8 +8,8 @@ export ZSH="/home/danilo/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="jreese"
+ZSH_THEME="robbyrussell"
+#ZSH_THEME="jreese"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,7 +69,7 @@ ZSH_THEME="jreese"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf ufw docker archlinux mvn npm ng gpg-agent)
+plugins=(git fzf ufw docker archlinux mvn npm ng gpg-agent taskwarrior)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,3 +101,11 @@ export TERM='xterm-256color'
 
 export PATH="$HOME/.node_modules/bin:$PATH"
 export npm_config_prefix=~/.node_modules
+
+function hydro_routes(){
+   sudo ip route add 163.34.0.0/16 via 192.168.137.1
+}
+
+function incra_routes(){
+   sudo ip route add 10.100.0.0/16 via 172.17.0.3
+}
