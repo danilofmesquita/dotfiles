@@ -67,9 +67,9 @@ bindsym $mod+q	[con_id="__focused__" title="^(?!dropdown_).*$"] kill
 bindsym --release $mod+button2 kill
 
 # Lançador de aplicativos
-bindsym $mod+d exec --no-startup-id "rofi -font 'monospace 11' -show drun -theme base16-dracula"
-bindsym $mod+Tab exec --no-startup-id "rofi -font 'monospace 11' -show window -theme base16-dracula"
-bindsym Mod1+Tab exec --no-startup-id "rofi -font 'monospace 11' -show window -theme base16-dracula"
+bindsym $mod+d exec --no-startup-id rofi-launcher
+bindsym $mod+Tab exec --no-startup-id rofi-window 
+bindsym Mod1+Tab exec --no-startup-id rofi-window
 
 # Lançador de bloqueio de tela
 bindsym $mod+b exec i3lock -c 282a36
@@ -168,9 +168,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Ações de saida
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Tem certeza que deseja sair?' -B 'Sim' 'i3-msg exit'"
-bindsym $mod+Shift+d exec "i3-nagbar -t warning -m 'Tem certeza que deseja reiniciar?' -B 'Sim' 'systemctl reboot'"
-bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'Tem certeza que deseja desligar?' -B 'Sim' 'systemctl poweroff'
+bindsym $mod+Shift+e exec --no-startup-id rofi-power
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Tem certeza que deseja sair?' -B 'Sim' 'i3-msg exit'"
+#bindsym $mod+Shift+d exec "i3-nagbar -t warning -m 'Tem certeza que deseja reiniciar?' -B 'Sim' 'systemctl reboot'"
+#bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'Tem certeza que deseja desligar?' -B 'Sim' 'systemctl poweroff'
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -197,8 +198,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
       position top
-      status_command i3blocks
-      tray_padding 4
+      status_command i3blocks 
+      tray_padding 3
       tray_output primary
 #     strip_workspace_numbers yes 
 
@@ -217,14 +218,14 @@ bar {
 }
 
 gaps inner 6
+#smart_gaps on
 
 exec --no-startup-id dex -ae i3
-exec --no-startup-id setxkbmap br -model thinkpad
+exec --no-startup-id thunar-volman 
 exec --no-startup-id dunst
 exec --no-startup-id picom
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift -l -15.77:-47.92
-exec --no-startup-id setxkbmap br -model thinkpad
 exec_always --no-startup-id autotiling
 
 focus_follows_mouse no

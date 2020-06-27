@@ -82,7 +82,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -99,7 +99,6 @@ export TERM='xterm-256color'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="$HOME/.node_modules/bin:$PATH"
 export npm_config_prefix=~/.node_modules
 
 function hydro_routes(){
@@ -108,4 +107,5 @@ function hydro_routes(){
 
 function incra_routes(){
    sudo ip route add 10.100.0.0/16 via 172.17.0.3
+   sudo ip route add 172.22.0.37 via 172.17.0.3
 }
