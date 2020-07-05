@@ -31,7 +31,7 @@ set $mod Mod4
 font pango:monospace 12
 
 # Configura o daemon de lock
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 282a36 --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 282828 --nofork
 
 # Controle de audio via teclado
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -137,7 +137,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -169,9 +168,6 @@ bindsym $mod+Shift+r restart
 
 # Ações de saida
 bindsym $mod+Shift+e exec --no-startup-id rofi-power
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Tem certeza que deseja sair?' -B 'Sim' 'i3-msg exit'"
-#bindsym $mod+Shift+d exec "i3-nagbar -t warning -m 'Tem certeza que deseja reiniciar?' -B 'Sim' 'systemctl reboot'"
-#bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'Tem certeza que deseja desligar?' -B 'Sim' 'systemctl poweroff'
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -181,15 +177,15 @@ mode "resize" {
 # Pressing right will grow the window’s width.
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
-      bindsym j resize shrink width 10 px or 10 ppt
-      bindsym k resize grow height 10 px or 10 ppt
-      bindsym l resize shrink height 10 px or 10 ppt
-      bindsym ccedilla resize grow width 10 px or 10 ppt
+    bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ccedilla resize grow width 10 px or 10 ppt
 
 # back to normal: Enter or Escape or $mod+r
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-      bindsym $mod+r mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -197,28 +193,28 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-      position top
-      status_command i3blocks 
-      tray_padding 3
-      tray_output primary
-#     strip_workspace_numbers yes 
+    position top
+        status_command i3blocks
+        i3bar_command i3bar -t
+        tray_output primary
+        tray_padding 3
+        tray_output none
+        colors {
+                background #28282800
+                statusline #ebdbb2
+                separator  #427b58
 
-      colors {
-            background #282A36
-            statusline #F8F8F2
-            separator  #44475A
-
-            focused_workspace  #44475A #44475A #F8F8F2
-            active_workspace   #282A36 #44475A #F8F8F2
-            inactive_workspace #282A36 #282A36 #BFBFBF
-            urgent_workspace   #FF5555 #FF5555 #F8F8F2
-            binding_mode       #FF5555 #FF5555 #F8F8F2
-      }
-
+                focused_workspace  #427b58 #427b58 #ebdbb2
+                active_workspace   #282828 #427b58 #ebdbb2
+                inactive_workspace #282828 #282828 #BFBFBF
+                urgent_workspace   #cc241d #cc241d #ebdbb2
+                binding_mode       #cc241d #cc241d #ebdbb2
+        }
 }
 
 gaps inner 6
 #smart_gaps on
+#hide_edge_borders smart
 
 exec --no-startup-id dex -ae i3
 exec --no-startup-id thunar-volman 
@@ -272,27 +268,19 @@ for_window [workspace=$ws2 class="code-oss"] layout tabbed
 for_window [workspace=$ws3 class="Thunderbird"] layout tabbed 
 
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #427b58 #427b58 #ebdbb2 #427b58   #427b58
+client.focused_inactive #665c54 #665c54 #ebdbb2 #665c54   #665c54
+client.unfocused        #282828 #282828 #BFBFBF #282828   #282828
+client.urgent           #665c54 #cc241d #ebdbb2 #cc241d   #cc241d
+client.placeholder      #282828 #282828 #ebdbb2 #282828   #282828
 
-client.background       #F8F8F2
+client.background       #ebdbb2
 
 bindsym $mod+Ctrl+Right move workspace to output right
 bindsym $mod+Ctrl+Left move workspace to output left
 
 bindsym $mod+Prior workspace next_on_output
 bindsym $mod+Next workspace prev_on_output
-
-#hide_edge_borders smart
-
-# Windows Swallow
-exec_always --no-startup-id python3 $HOME/.config/i3/i3-swallow.py
-
-# Moushe Wheel
-# exec --no-startup-id imwheel -b 45
 
 # Quick Terminal
 exec --no-startup-id alacritty --title dropdown_terminal

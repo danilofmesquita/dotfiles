@@ -155,7 +155,7 @@ max_icon_size = 80
 icon_path = /usr/share/icons/Papirus/16x16/status/:/usr/share/icons/Papirus/16x16/devices/:/usr/share/icons/Papirus/16x16/emblems/:/usr/share/icons/Papirus/16x16/actions/:/usr/share/icons/Papirus/16x16/panel/
 
 frame_width = 2
-frame_color = "#bd93f9"
+frame_color = "#689d6a"
 
 [shortcuts]
 
@@ -181,22 +181,22 @@ frame_color = "#bd93f9"
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-frame_color = "#bd93f9"
-foreground = "#f8f8f2"
-background = "#282a36"
+frame_color = "#689d6a"
+foreground = "#ebdbb2"
+background = "#282828"
 
 timeout = 4
 
 [urgency_normal]
-frame_color = "#bd93f9"
-foreground = "#f8f8f2"
-background = "#282a36"
+frame_color = "#689d6a"
+foreground = "#ebdbb2"
+background = "#282828"
 timeout = 6
 
 [urgency_critical]
-frame_color = "#ff5555"
-foreground = "#f8f8f2"
-background = "#282a36"
+frame_color = "#cc241d"
+foreground = "#ebdbb2"
+background = "#282828"
 timeout = 8
 
 

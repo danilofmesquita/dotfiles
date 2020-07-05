@@ -1,1 +1,8 @@
-@import "../themes/colorschemes/material-dark/deep_purple.rasi"
+* {
+  accent:           #427b58;
+  background:       #282828;
+  background-light: #3c3836;
+  foreground:       #ebdbb2;
+  on:               #50fa7b;
+  off:              #ef5355;
+}

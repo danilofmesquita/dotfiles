@@ -107,5 +107,12 @@ function hydro_routes(){
 
 function incra_routes(){
    sudo ip route add 10.100.0.0/16 via 172.17.0.3
-   sudo ip route add 172.22.0.37 via 172.17.0.3
+   sudo ip route add 172.22.0.0/16 via 172.17.0.3
+   sudo ip route add 172.20.0.0/16 via 172.17.0.3
+   sudo ip route add 172.21.0.0/16 via 172.17.0.3
 }
+
+alias vim=nvim
+alias vimrc="vim ~/.config/nvim/init.vim"
+alias zshrc="vim ~/.zshrc"
+alias vimdiff="nvim -d"
