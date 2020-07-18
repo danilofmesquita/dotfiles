@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/danilo/.oh-my-zsh"
 
@@ -9,7 +6,6 @@ export ZSH="/home/danilo/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-#ZSH_THEME="jreese"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -88,7 +84,7 @@ export EDITOR='vim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 export TERM='xterm-256color'
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -101,18 +97,21 @@ export TERM='xterm-256color'
 
 export npm_config_prefix=~/.node_modules
 
-function hydro_routes(){
+function h_routes(){
    sudo ip route add 163.34.0.0/16 via 192.168.137.1
 }
 
-function incra_routes(){
+function i_routes(){
    sudo ip route add 10.100.0.0/16 via 172.17.0.3
    sudo ip route add 172.22.0.0/16 via 172.17.0.3
    sudo ip route add 172.20.0.0/16 via 172.17.0.3
    sudo ip route add 172.21.0.0/16 via 172.17.0.3
 }
 
-alias vim=nvim
-alias vimrc="vim ~/.config/nvim/init.vim"
+alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
-alias vimdiff="nvim -d"
+alias i3cfg="vim ~/.config/i3/config"
+
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+export M2_SKIP_NPM=true

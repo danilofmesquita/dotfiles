@@ -9,32 +9,40 @@ call plug#begin()
 Plug 'lilydjwg/colorizer'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
-Plug 'dense-analysis/ale'
+Plug 'vim-test/vim-test'
+Plug 'prettier/vim-prettier'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
+
 " Better Colors
+set bg=dark
 set termguicolors
-let g:gruvbox_italic = 0
-let g:gruvbox_guisp_fallback = "bg" 
+let g:gruvbox_italic=0
+let g:gruvbox_guisp_fallback="bg" 
 colorscheme gruvbox
+let g:terminal_ansi_colors=['#282828', '#cc241d', '#98971a', '#d79921',
+            \ '#458588', '#b16286', '#689d6a', '#a89984', '#928374', '#fb4934',
+            \ '#b8bb26', '#fabd2f', '#83a598', '#d3869b', '#8ec07c', '#ebdbb2']
 
 " Number
 set number
 set relativenumber
 
-" Airlinelet g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" Airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_theme='gruvbox'
 
 " Learn
 noremap <Up> <Nop>
@@ -46,35 +54,56 @@ noremap <Right> <Nop>
 autocmd FileType text setlocal spell spelllang=pt_br,en_us
 autocmd FileType markdown setlocal spell spelllang=pt_br,en_us
 autocmd FileType asciidoc setlocal spell spelllang=pt_br,en_us
+autocmd FileType sql setlocal spell spelllang=pt_br,en_us
 
 " Clipboard
-set clipboard+=unnamedplus
+"set clipboard=unnamedplus
 
 " Mouse
 set mouse=a
 
 " Misc
+set hidden
 set showcmd
 set noshowmode
 set cursorline
 set tabstop=4
 set expandtab
 set shiftwidth=4
-set noro
+set shiftround
+set autoindent
+set smarttab
+set backspace=indent,eol,start
+set hls
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=1
+set display+=lastline
+set colorcolumn=80
+
+" VimDiff
+if &diff
+    set noro
+endif
 
 " fzf
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
-nnoremap <C-S-N> :Files<CR>
-nnoremap <C-S-F> :Ag 
+nnoremap <C-N> :Files<CR>
+nnoremap <C-F> :Ag 
 
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical"
 
-" Ale
-let g:ale_completion_enabled = 1
-let g:ale_completion_tsserver_autoimport = 1
-autocmd FileType typescript nnoremap <C-A-L> :ALEFix prettier<CR>
-autocmd FileType typescript nnoremap <C-A-O> :ALEOrganizeImports<CR>
-autocmd FileType typescript nnoremap <A-CR> :ALEFix tslint<CR>
+"TESTS
+nnoremap <Leader>tn :TestNearest<CR>
+nnoremap <Leader>tf :TestFile<CR>
+
+" Location List
+nnoremap <C-k> :lprevious<CR>
+nnoremap <C-j> :lnext<CR>
+
+" Prettier
+nnoremap <Leader>prt :Prettier<CR>

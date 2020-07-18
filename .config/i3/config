@@ -62,9 +62,6 @@ bindsym $mod+Return exec  --no-startup-id i3-sensible-terminal
 
 # Fechar Janelas
 bindsym $mod+q	[con_id="__focused__" title="^(?!dropdown_).*$"] kill
-#bindsym $mod+Shift+q kill
-#bindsym Mod1+F4 kill
-bindsym --release $mod+button2 kill
 
 # Lançador de aplicativos
 bindsym $mod+d exec --no-startup-id rofi-launcher
@@ -194,32 +191,42 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     position top
-        status_command i3blocks
-        i3bar_command i3bar -t
-        tray_output primary
-        tray_padding 3
+        #status_command i3blocks
+        status_command i3status 
+        i3bar_command i3bar 
+        #tray_output primary
+        #tray_padding 4
         tray_output none
+        separator_symbol "|"
         colors {
-                background #28282800
+                background #1d2021
                 statusline #ebdbb2
-                separator  #427b58
+                separator  #A89984
 
-                focused_workspace  #427b58 #427b58 #ebdbb2
-                active_workspace   #282828 #427b58 #ebdbb2
+                focused_workspace  #A89984 #A89984 #222828
+                active_workspace   #282828 #A89984 #ebdbb2
                 inactive_workspace #282828 #282828 #BFBFBF
                 urgent_workspace   #cc241d #cc241d #ebdbb2
                 binding_mode       #cc241d #cc241d #ebdbb2
         }
 }
 
-gaps inner 6
+#gaps inner 8
 #smart_gaps on
-#hide_edge_borders smart
+hide_edge_borders smart
+set $mode_gaps Gaps: (c)entralizar | (p)adrão
+mode "$mode_gaps" {
+    bindsym p gaps vertical all set 0 ; gaps horizontal current set 0
+    bindsym c gaps vertical all set 10 ; gaps horizontal current set 300
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+g mode "$mode_gaps"
 
 exec --no-startup-id dex -ae i3
 exec --no-startup-id thunar-volman 
 exec --no-startup-id dunst
-exec --no-startup-id picom
+#exec --no-startup-id picom
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift -l -15.77:-47.92
 exec_always --no-startup-id autotiling
@@ -227,15 +234,13 @@ exec_always --no-startup-id autotiling
 focus_follows_mouse no
 mouse_warping none
 
-for_window [class=".*"] border pixel 2
-#for_window [class="Alacritty"] floating enable
+for_window [class=".*"] border pixel 1
 for_window [class="Yad"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="Transmission-gtk"] floating enable
-#for_window [class="Microsoft Teams - Preview"] floating enable
 for_window [title="Notificação do Microsoft Teams"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
@@ -268,7 +273,7 @@ for_window [workspace=$ws2 class="code-oss"] layout tabbed
 for_window [workspace=$ws3 class="Thunderbird"] layout tabbed 
 
 # class                 border  bground text    indicator child_border
-client.focused          #427b58 #427b58 #ebdbb2 #427b58   #427b58
+client.focused          #A89984 #A89984 #282828 #A89984   #A89984
 client.focused_inactive #665c54 #665c54 #ebdbb2 #665c54   #665c54
 client.unfocused        #282828 #282828 #BFBFBF #282828   #282828
 client.urgent           #665c54 #cc241d #ebdbb2 #cc241d   #cc241d

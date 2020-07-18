@@ -8,6 +8,12 @@ interval=5
 signal=10
 label= 
 
+[iface]
+label= 
+command=contrib/iface/iface
+color=#98971a
+interval=10
+
 [volume]
 command=contrib/volume/volume
 LABEL=墳 
@@ -38,4 +44,4 @@ separator=false
 command=contrib/calendar/calendar
 interval=10
 LABEL= 
-DATEFMT=+%d/%m/%Y %H:%M
+DATEFMT=+%d/%m/%Y %H:%M 
